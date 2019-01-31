@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { ProductService } from '../product.service';
     templateUrl: './product-edit.component.html',
     styleUrls: ['./product-edit.component.css']
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, AfterViewInit {
     @ViewChild(NgForm) editForm: NgForm;
     pageTitle: string = 'Product Edit';
     errorMessage: string;
@@ -32,6 +32,10 @@ export class ProductEditComponent implements OnInit {
                 this.getProduct(id);
             }
         );
+    }
+
+    ngAfterViewInit(): void {
+        console.log(this.editForm);
     }
 
     getProduct(id: number): void {
@@ -101,4 +105,6 @@ export class ProductEditComponent implements OnInit {
         // Navigate back to the product list
         this.router.navigate(['/products']);
     }
+
+
 }
